@@ -8,7 +8,7 @@ class Bid(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
-    start_amount = models.IntegerField(default=1,validators=[MaxValueValidator(1000000000),MinValueValidator(1)])
+    start_amount = models.DecimalField(max_digits=12, decimal_places=2,validators=[MinValueValidator(0)])
     description = models.TextField(max_length=500)
     picture = models.TextField(null=True)
 
@@ -23,3 +23,10 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.body
+
+class Donation(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='donation')
+    donation_amount = models.DecimalField(max_digits=12, decimal_places=2,validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return str(self.donation_amount)

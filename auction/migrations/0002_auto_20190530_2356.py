@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 def seed(apps, schema_editor):
     Profile = apps.get_model('accounts', 'Profile')
     Bid = apps.get_model('auction', 'Bid')
-    Comments = apps.get_model('auction','Comments')
+    Comments = apps.get_model('auction', 'Comments')
+    Donation = apps.get_model('auction', 'Donation')
 
-    user1 = User(username='bob', password='testing1234', email='bob@gmail.com', first_name='Bob', last_name='Belcher')
+    user1 = User(username='bob', password='testing1234', email='b@b.com', first_name='Bob', last_name='Belcher')
     user1.save()
     user2 = User(username='tom', password='testing1234', email='t@t.com', first_name='Tom', last_name='Hannigan')
     user2.save()
@@ -72,14 +73,21 @@ def seed(apps, schema_editor):
     Comments(bid = bid_three, profile = profile_one, body='Please please please', rating='9').save()
     Comments(bid = bid_four, profile = profile_four, body='Is this worth my time or is this wasiting me time!?', rating='4').save()
 
+    Donation(profile = profile_one, donation_amount="500").save()
+    Donation(profile = profile_two, donation_amount="250").save()
+    Donation(profile = profile_three, donation_amount="100").save()
+    Donation(profile = profile_four, donation_amount="50").save()
+
 def delete_all(apps, schema_editor):
     Profile = apps.get_model('accounts', 'Profile')
     Bid = apps.get_model('auction', 'Bid')
     Comments = apps.get_model('auction', 'Comments')
+    Donation = apps.get_model('auction', 'Donation')
     Profile.objects.all().delete()
     Bid.objects.all().delete()
     Comments.objects.all().delete()
     User.objects.all().delete()
+    Donation.objects.all().delete()
 
 
 class Migration(migrations.Migration):
@@ -91,5 +99,3 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(seed, delete_all)
     ]
-
-
