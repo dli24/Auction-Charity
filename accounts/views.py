@@ -7,8 +7,6 @@ from .models import Profile
 
 def register(request):
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -21,7 +19,7 @@ def register(request):
                     return render(request, 'accounts/register.html', {'error': 'That email has already been registered'})
                 else:
                     user = User.objects.create_user(
-                        username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+                        username=username, password=password, email=email)
                     user.save()
                     # if user is not None:
                     #     auth.login(request, user)

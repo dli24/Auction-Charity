@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
 <h2 class="loginTitle">Login</h2>
 
 {% if error %}
@@ -5,12 +8,13 @@
 {% endif %}
 
 <div class="loginForm">
+	<h2>Log In</h2>
 	<form action="{% url 'login' %}" method="POST">
 		{% csrf_token %}
 
 		<div>
 			<label for="username">Username</label>
-			<input class="username" type="text" name="username" required maxlength="25" minlength="2" />
+			<input class="username" type="text" name="username" required maxlength="50" minlength="2" />
 		</div>
 
 		<div>
@@ -20,7 +24,7 @@
 				type="password"
 				name="password"
 				required
-				maxlength="25"
+				maxlength="50"
 				minlength="4"
 			/>
 		</div>
@@ -28,3 +32,5 @@
 		<input class="submit" type="submit" value="Login" />
 	</form>
 </div>
+
+{% endblock %}
