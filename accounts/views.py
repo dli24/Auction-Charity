@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import ProfileForm
 from .models import Profile
+from auction.models import Bid, Comments, Donation
 
 def register(request):
     if request.method == 'POST':
@@ -21,9 +22,9 @@ def register(request):
                     user = User.objects.create_user(
                         username=username, password=password, email=email)
                     user.save()
-                    # if user is not None:
-                    #     auth.login(request, user)
-                    #     return redirect('profile_create')
+                    if user is not None:
+                        auth.login(request, user)
+                        return redirect('profile_create')
         else:
             return render(request, 'accounts/register.html', {'error': 'Passwords do not match'})
     else:
@@ -48,3 +49,26 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('landing')
+
+@login_required
+def profile_create(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('landing')
+    else:
+        form = ProfileForm()
+    return render(request, 'accounts/profile_form.html', {'form': form})
+
+
+@login_required
+def profile(request, user_id):
+    profile = Profile.objects.get(user=user_id)
+    user = request.user
+    bids = Bid.objects.filter(profile=profile.pk)
+    comments = Comments.objects.filter(profile=profile.pk)
+    donations = Donation.objects.filter(profile=profile.pk)
+    return render(request, 'accounts/profile.html', {'profile': profile,'bid':bids, 'comments': comments, 'donations': donations, 'user': user})
