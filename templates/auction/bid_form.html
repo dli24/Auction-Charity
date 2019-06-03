@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block loggedHome %}
+
+<div class="bidForm">
+        <h2>Create your Bid</h2>
+        <form action="{% url 'create_bid' %}" method="POST">
+            {% csrf_token %}
+    
+            <div>
+                <label for="name">Bid Name: </label>
+                <input class="name" type="text" name="name" maxlength="50" minlength="2" required />
+            </div>
+            <div>
+                <label for="description">Please Describe Your Bid: </label><br />
+                <textarea class="description" name="description" required cols="52" rows="4"></textarea>
+            </div>
+            <div>
+                <label for="picture">Please Upload A Photo: </label><br />
+                <textarea class="picture" type="text" name="picture" cols="52" rows="8"></textarea>
+            </div>
+            <div>
+                <label for="start_date">Start Date: </label>
+                <input class="start_date" type="datetime-local" name="start_date" maxlength="50" minlength="2" required />
+            </div>
+            <div>
+                <label for="end_date">End Date: </label>
+                <input class="end_date" type="datetime-local" name="end_date" maxlength="50" minlength="2" required />
+            </div>
+            <div>
+                <label for="start_amount">Starting Amount </label>
+                <input class="start_amount" type="number" name="start_amount" maxlength="50" minlength="2" required />
+            </div>
+            <input class="submit" type="submit" value="SAVE" />
+        </form>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,18 @@
+<form method="POST">
+        {% csrf_token %}
+        <!-- {{ form.as_p }} -->
+    
+        <div class="container">
+            <h1>Add Comment</h1>
+            <div class="commentForm">
+    
+                <label for="body">comment </label>
+                <input class="body" type="text" name="body" required />
+    
+                <label for="rating">Rating: </label> 
+                <input type="number" name="rating" step="any" required />
+                <button type="submit" class="commentButton">Save</button>
+            </div>
+        </div>
+    
+    </form>

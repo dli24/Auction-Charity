@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block loggedHome %}
+
+<div class="donationForm">
+        <h2>Donate Your Money to Charity</h2>
+        <form action="{% url 'profile_create' %}" method="POST">
+            {% csrf_token %}
+    
+            <div>
+                <label for="donation_amount">Donation</label>
+                <input class="donation_amount" type="number" name="donation_amount" maxlength="50" minlength="2" />
+            </div>
+            <input class="submit" type="submit" value="SAVE" />
+        </form>
+    </div>
+
+{% endblock %}

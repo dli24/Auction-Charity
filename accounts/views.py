@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import ProfileForm
+# from .forms import ProfileForm
 from .models import Profile
 from auction.models import Bid, Comments, Donation
 
@@ -38,7 +38,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('landing')
+            return redirect('landing2')
         else:
             return render(request, 'accounts/login.html', {'error': 'Invalid Credentials...'})
 
@@ -53,15 +53,15 @@ def logout(request):
 @login_required
 def profile_create(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('landing')
+        bio = request.POST['bio']
+        picture = request.POST['picture']
+        creditcard = request.POST['creditcard']
+        user = request.user
+        profile = Profile.objects.create(bio=bio, picture=picture, creditcard=creditcard, user=user)
+        profile.save()
+        return redirect('landing2')
     else:
-        form = ProfileForm()
-    return render(request, 'accounts/profile_form.html', {'form': form})
+        return render(request, 'accounts/profile_form.html')
 
 
 @login_required
@@ -71,4 +71,4 @@ def profile(request, user_id):
     bids = Bid.objects.filter(profile=profile.pk)
     comments = Comments.objects.filter(profile=profile.pk)
     donations = Donation.objects.filter(profile=profile.pk)
-    return render(request, 'accounts/profile.html', {'profile': profile,'bid':bids, 'comments': comments, 'donations': donations, 'user': user})
+    return render(request, 'accounts/profile.html', {'profile': profile, 'bids':bids, 'comments': comments, 'donations': donations, 'user': user})

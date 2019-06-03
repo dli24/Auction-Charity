@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block content %}
-<h2 class="loginTitle">Login</h2>
+{% block unloggedHome %}
 
 {% if error %}
 <p style="background-color: salmon; padding: 10px;">{{ error }}</p>

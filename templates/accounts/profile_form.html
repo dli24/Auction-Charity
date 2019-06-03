@@ -1,8 +1,28 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block content %} 
+{% block loggedHome %} 
 
-
+<div class="profileForm">
+        <h2>Create Your Profile</h2>
+        <form action="{% url 'profile_create' %}" method="POST">
+            {% csrf_token %}
+    
+            <div>
+                <label for="bio">Bio</label><br />
+                <textarea class="bio" type="text" name="bio" cols="52" rows="8"></textarea>
+            </div>
+    
+            <div>
+                <label for="picture">Upload Picture</label><br />
+                <textarea class="picture" type="text" name="picture" cols="52" rows="10"></textarea>
+            </div>
+            <div>
+                <label for="creditcard">CreditCard</label>
+                <input class="creditcard" type="number" name="creditcard" cols="40" rows="5" required />
+            </div>
+            <input class="submit" type="submit" value="SAVE" />
+        </form>
+    </div>
 
 
 

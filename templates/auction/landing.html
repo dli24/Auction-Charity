@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block content %}
+{% block unloggedHome %}
     <div class="wrapper">
         <br />
-        <h1>$ had been donated to charity</h1>
+        <h1>Together we have donated ${{ total_donations|floatformat:2 }}!!</h1>
         <br />
-        <h2>Auction Charity</h2>
-        <h3>"Your Bid will goes to Charity"</h3>
+        <h2>AUCTION CHARITY</h2>
+        <h3>"We raise for school and nonprofits!"</h3>
     </div>
 {% endblock %}

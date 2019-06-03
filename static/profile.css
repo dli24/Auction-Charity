@@ -1,0 +1,15 @@
+.profile {
+    color:white;
+}
+.profile h1{
+    text-align: center;
+}
+.profile img{
+    height: 60vh;
+    width: 60vw;
+    margin-left: 20%;
+}
+.profile p{
+    margin: 0 20%;
+}
+

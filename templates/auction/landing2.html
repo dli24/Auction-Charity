@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block loggedHome %}
+<div class="landing2">
+    <a class="create_bid" href="{% url 'create_bid' %}"><i class="fas fa-plus"></i> Add an Bid</a>
+    <div class="wrapper2">
+        <ul>
+            <li class="bidlist">
+                <div class="bids">
+                    <div class="bidimage">
+
+                    </div>
+                </div>
+                <h4>Bidding: $ </h4>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
