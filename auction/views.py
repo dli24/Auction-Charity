@@ -58,24 +58,21 @@ def bid_detail(request, bid_id):
 	bid = Bid.objects.get(id=bid_id)
 	user = request.user
 	profile = Profile.objects.get(user=user.pk)
-	current_bid = bid.start_amount
-	bidding = Bidding.objects.order_by('-amount').first()
-
+	bidding = Bidding.objects.filter(bid=bid.id).order_by('-amount').first()
+	
 
 	# highest_bid = Bidding.objects.order_by('-amount')[0]
+	if bidding == None:
+		current_bid = bid.start_amount
+	else:
+		current_bid = bidding.amount	
 	if request.method == 'POST':
 		form = BiddingForm(request.POST)
-		# print(highest_bid.amount <= bid.start_amount)
-		# if (highest_bid.amount <= bid.start_amount):
-		# 	messages.error(request, 'ERROR')
 		if form.is_valid():
 			new_bid = form.save(commit=False)
 			new_bid.profile = profile
 			new_bid.bid = bid
-			# new_bid.save()
-			# bidding.amount = bid.start_amount
-			# current_bid = bidding.amount
-		if (new_bid.amount <= current_bid) or (new_bid.amount <= bidding.amount):
+		if (new_bid.amount <= current_bid):
 			return render(request, 'auction/bid_detail.html', {'bid':bid, 'error': 'Please enter an number that is greater than the current value.'})
 		else:
 			new_bid.bid = bid
@@ -83,4 +80,5 @@ def bid_detail(request, bid_id):
 			return render(request, 'auction/bid_detail.html', {'bid':bid, 'current_bid': new_bid.amount})
 	else:
 		form = BiddingForm()
-	return render(request, 'auction/bid_detail.html', {'bid':bid, 'profile':profile, 'current_bid':bidding.amount})
+		return render(request, 'auction/bid_detail.html', {'bid':bid, 'profile':profile, 'current_bid':current_bid})
+	
