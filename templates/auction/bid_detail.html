@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'biddetail.css' %}" />{% endblock %}
+{% block loggedHome %}
+
+<div class="biddetail">
+        <div class="bidleft">
+            <img src="{{ bid.picture }}" />
+            <h3>{{ bid.name }}</h3>
+            <p>{{ bid.description }}</p>
+        </div>
+        <div class="bidright">
+            <h3>Starting Amount: ${{ bid.start_amount }}</h3>
+            <h3>Current Amount: ${{ current_bid|floatformat:2  }}</h3>
+                {% if error %}
+                <p style="background-color: salmon; padding: 10px;">{{ error }}</p>
+                {% endif %}
+                <form action="{% url 'bid_detail' bid_id=bid.id  %}" method="POST">
+                    {% csrf_token %}
+                    <div class="container">
+                        <h1>Place Your Bid</h1>
+                        <div class="bidForm">              
+                            <label for="amount">Bid Amount: </label>
+                            <input class="amount" type="number" name="amount" required />
+                            <button type="submit" class="amountButton">Save</button>
+                        </div>
+                    </div>
+                
+                </form>
+        </div>
+</div>
+
+{% endblock %}

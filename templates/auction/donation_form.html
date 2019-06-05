@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'donation.css' %}" />{% endblock %}
 {% block loggedHome %}
 
 <div class="donationForm">
         <h2>Donate Your Money to Charity</h2>
-        <form action="{% url 'profile_create' %}" method="POST">
+        <form action="{% url 'donation_new' %}" method="POST">
             {% csrf_token %}
     
             <div>
@@ -14,5 +15,11 @@
             <input class="submit" type="submit" value="SAVE" />
         </form>
     </div>
-
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

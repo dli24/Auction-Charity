@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'login.css' %}" />{% endblock %}
 {% block unloggedHome %}
 
 {% if error %}

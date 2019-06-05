@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bid, Comments, Donation
+from .models import Bid, Comments, Donation, Bidding
 
 class BidForm(forms.ModelForm):
     class Meta:
@@ -15,3 +15,8 @@ class DonationForm(forms.ModelForm):
     class Meta:
         model = Donation
         fields = ('donation_amount',)
+
+class BiddingForm(forms.ModelForm):
+    class Meta:
+        model = Bidding
+        fields = ('amount',)

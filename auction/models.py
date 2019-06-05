@@ -15,6 +15,14 @@ class Bid(models.Model):
     def __str__(self):
         return self.name
 
+class Bidding(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='bidding')
+    bid = models.ForeignKey(Bid, on_delete=models.CASCADE, related_name='bidding')
+    amount = models.DecimalField(max_digits=12, decimal_places=2,validators=[MinValueValidator(0)], null=True)
+
+    def __str__(self):
+        return str(self.amount)
+
 class Comments(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comment')
     bid = models.ForeignKey(Bid, on_delete=models.CASCADE, related_name='comment')

@@ -99,3 +99,4 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(seed, delete_all)
     ]
+

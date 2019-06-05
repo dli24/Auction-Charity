@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'profile.css' %}" />{% endblock %}
 {% block loggedHome %}
 
 <div class="profile">
     <img src="{{ profile.picture }}" alt="{{ profile.user.username }}" />
     <h1>{{profile.user.username}}</h1>
     <p>{{ profile.bio }}</p>
+
+    {% if comments %}
+    <h1>Comments</h1>
+    {% for comment in comments %}
+    <p>{{ comment }}</p>
+    {% endfor %}
+    {% endif %}
 
 </div>
 
