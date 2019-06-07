@@ -1,1 +1,1 @@
-web: gunicorn hike_django.wsgi --log-file -
+web: gunicorn auction_django.wsgi --log-file -
