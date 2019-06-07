@@ -1,0 +1,21 @@
+.landing2{
+    color:white;
+}
+.wrapper2 ul li{
+    list-style: none;
+    float: left;
+}
+.wrapper2 ul li a{
+    text-decoration: none;
+    color:white;
+}
+.wrapper2 h4{
+    margin: 0;
+}
+.bidimage img{
+    height: 200px;
+    width: 200px;
+    margin-left: 2px;
+    margin-top: 4%;
+}
+

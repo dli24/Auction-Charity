@@ -1,0 +1,23 @@
+.landing2{
+    color:white;
+}
+.landing2 h4{
+    text-align: center;
+}
+.create_bid{
+    text-decoration: none;
+    color: white;
+    margin-left: 80%;
+    font-size: 1.5em;
+    border: 1px solid white;
+    padding: 7px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+.create_bid:hover{
+    color: black;
+    background-color: white;
+}

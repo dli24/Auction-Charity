@@ -1,0 +1,18 @@
+.biddetail{
+    margin-top: 7%;
+    color:white;
+    display: flex;
+    flex-direction: row;
+}
+.biddetail div img{
+    height: 70%;
+    width: 70%;
+}
+.bidleft{
+    width: 48vw;
+    text-align: center;
+}
+.bidright{
+    width: 48vw;
+    text-align: center;
+}
