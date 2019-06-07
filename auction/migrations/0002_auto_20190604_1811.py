@@ -1,19 +1,21 @@
 from django.db import migrations
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 def seed(apps, schema_editor):
     Profile = apps.get_model('accounts', 'Profile')
     Bid = apps.get_model('auction', 'Bid')
     Comments = apps.get_model('auction', 'Comments')
     Donation = apps.get_model('auction', 'Donation')
+    today = timezone.now()
 
-    user1 = User(username='pikachu', password='testing1234', email='p@p.com', first_name='pikachu', last_name='mice')
+    user1 = User(username='pikachu', password='testing1234', email='p@p.com', first_name='pikachu', last_name='mice', last_login=today)
     user1.save()
-    user2 = User(username='jerry', password='testing1234', email='j@j.com', first_name='Jerry', last_name='mice')
+    user2 = User(username='jerry', password='testing1234', email='j@j.com', first_name='Jerry', last_name='mice', last_login=today)
     user2.save()
-    user3 = User(username='teemo', password='testing1234', email='t@t.com', first_name='Teemo', last_name='mice')
+    user3 = User(username='teemo', password='testing1234', email='t@t.com', first_name='Teemo', last_name='mice', last_login=today)
     user3.save()
-    user4 = User(username='spiderman', password='testing1234', email='s@s.com', first_name='Peter', last_name='Parker')
+    user4 = User(username='spiderman', password='testing1234', email='s@s.com', first_name='Peter', last_name='Parker', last_login=today)
     user4.save()
 
     profile_one = Profile(user_id=user1.id, bio="Pikachu (Japanese: ピカチュウ Hepburn: Pikachū, pronounced [pikatɕɯː], English: /ˈpiːkətʃuː/) are a species of Pokémon, fictional creatures that appear in an assortment of video games, animated television shows and movies, trading card games, and comic books licensed by The Pokémon Company, a Japanese corporation. They are yellow rodent-like creatures with powerful electrical abilities. In most vocalized appearances, including the anime and certain video games, they are primarily voiced by Ikue Ōtani. A Pikachu also appears as part of the main cast in the live-action animated film Pokémon Detective Pikachu, played in CGI and voiced by Ryan Reynolds.", picture='https://i.ytimg.com/vi/1roy4o4tqQM/maxresdefault.jpg')
