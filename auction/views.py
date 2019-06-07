@@ -83,8 +83,11 @@ def bid_detail(request, bid_id):
 
 @login_required
 def endbid(request):
-	bids = Bid.objects.all().order_by('end_date')
-	return render(request, 'auction/endbid.html', {'bids':bids})
+	bids = Bid.objects.all()
+	user = request.user
+	profile = Profile.objects.get(user=user.pk)
+	bidding = Bidding.objects.all().select_related('profile').select_related('bid').order_by('-amount').first()
+	return render(request, 'auction/endbid.html', {'bids':bids, 'user':user, 'profile':profile, 'bidding':bidding})
 
 def about(request):
     return render(request, 'about.html')

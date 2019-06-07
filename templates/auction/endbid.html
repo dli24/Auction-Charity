@@ -7,18 +7,17 @@
         <div class="wrapper2">
             <ul>
                 {% for bid in bids %}
-                {% if bid.ending == False%}
+                {% if bid.ending == False and bidding %}
             <li>
                 <li class="bidlist">
-                            <a href="{% url 'bid_detail' bid_id=bid.id %}">
                         <div class="bids">
+                                <h4>BID: {{ bid.name }}</h4>
+                                <h4>BID WINNER IS: {{ bidding.bid.profile|title }} !</h4>
                             <div class="bidimage">
                                 <img src="{{ bid.picture }}" />
                             </div>
                         </div>
-                        <h4>{{ bid.name }}</h4>
                         <h4>Ended!! <br/> {{ bid.end_date }}</h4>
-                    </a>
                 </li>
             </li>
             {% endif %}
