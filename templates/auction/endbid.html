@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block cssLink %}<link rel="stylesheet" href="{% static 'bid.css' %}" /><link rel="stylesheet" href="{% static 'landing2.css' %}" />{% endblock %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'bid.css' %}" />{% endblock %}
 {% block loggedHome %}
-<div class="landing2">
-        <a class="create_bid" href="{% url 'create_bid' %}"><i class="fas fa-plus"></i> Add an Bid</a>
-        <div class="wrapper2">
+<div class="endbid">
             <ul>
-                {% for bid in bids %}
+            {% for bid in bids %}
                 {% if bid.ending == False and bidding %}
-            <li>
-                <li class="bidlist">
-                        <div class="bids">
-                                <h4>BID: {{ bid.name }}</h4>
-                                <h4>BID WINNER IS: {{ bidding.bid.profile|title }} !</h4>
-                            <div class="bidimage">
+                    <li class="bidlist">
+                        <div class="inside">
+                            <div class="endpicture">
                                 <img src="{{ bid.picture }}" />
                             </div>
+                            <div class="endtext">
+                                <h4><i class="fal fa-trophy-alt"></i></h4>
+                                <h4>BID: {{ bid.name }}</h4>
+                                <h4>OUR WINNER IS: {{ bidding.bid.profile|title }} !<br/> {{ bid.end_date }}</h4>
+                            </div>
                         </div>
-                        <h4>Ended!! <br/> {{ bid.end_date }}</h4>
-                </li>
-            </li>
-            {% endif %}
-                {% endfor %}
+                    </li>
+
+                {% endif %}
+            {% endfor %}
             </ul>
-        </div>
+
     </div>
-
-
 {% endblock %}

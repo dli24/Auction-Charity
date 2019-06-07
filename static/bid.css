@@ -19,3 +19,21 @@
     margin-top: 4%;
 }
 
+.endbid{
+    color: white;
+    margin-top: 5%;
+}
+.endbid .inside{
+    display:flex;
+    flex-direction: row;
+}
+.endbid ul li{
+    list-style: none;
+}
+.endpicture img{
+    height: 150px;
+    width: 150px;
+}
+.endtext {
+    margin-left: 3%;
+}
