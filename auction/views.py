@@ -11,10 +11,7 @@ from django.utils import timezone
 
 def landing(request):
 	donations = Donation.objects.all().aggregate(Sum('donation_amount')).get('donation_amount__sum',0.00)
-	bids = Bid.objects.all().aggregate(Sum('start_amount')).get('start_amount__sum', 0.00)
-	bids= bids*Decimal(.15)
-	total_donations = bids + donations
-	return render(request, 'auction/landing.html', {'total_donations':total_donations})
+	return render(request, 'auction/landing.html', {'donations':donations})
 
 @login_required
 def landing2(request):
