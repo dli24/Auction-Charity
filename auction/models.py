@@ -14,6 +14,13 @@ class Bid(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def ending(self):
+        now = timezone.now()
+        if self.end_date >= now:
+            return True
+        else:
+            return False
 
 class Bidding(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='bidding')

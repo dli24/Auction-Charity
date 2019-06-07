@@ -8,6 +8,7 @@
     <div class="wrapper2">
         <ul>
             {% for bid in bids %}
+            {% if bid.ending %}
             <li class="bidlist">
                     <a href="{% url 'bid_detail' bid_id=bid.id %}">
                 <div class="bids">
@@ -16,9 +17,10 @@
                     </div>
                 </div>
                 <h4>{{ bid.name }}</h4>
-                <h4>Bidding: ${{ bid.start_amount }} </h4>
-                </a>
-            </li>
+                <h4>Ending: <br/> {{ bid.end_date }}</h4>
+            </a>
+        </li>
+        {% endif %}
             {% endfor %}
         </ul>
     </div>

@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Sum
 # from .forms import ProfileForm
 from .models import Profile
-from auction.models import Bid, Comments, Donation
+from auction.models import Bid, Comments, Donation, Bidding
 
 def register(request):
     if request.method == 'POST':
@@ -70,5 +71,6 @@ def profile(request, user_id):
     user = request.user
     bids = Bid.objects.filter(profile=profile.pk)
     comments = Comments.objects.filter(profile=profile.pk)
-    donations = Donation.objects.filter(profile=profile.pk)
+    donations = Donation.objects.filter(profile=profile.pk).aggregate(Sum('donation_amount')).get('donation_amount__sum',0.00)
+    # bidding = Bidding.objects.filter(profile=profile.pk).order_by('-amount').first()
     return render(request, 'accounts/profile.html', {'profile': profile, 'bids':bids, 'comments': comments, 'donations': donations, 'user': user})

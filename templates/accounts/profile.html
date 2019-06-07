@@ -4,16 +4,25 @@
 {% block loggedHome %}
 
 <div class="profile">
-    <img src="{{ profile.picture }}" alt="{{ profile.user.username }}" />
-    <h1>{{profile.user.username}}</h1>
-    <p>{{ profile.bio }}</p>
+    <div class="profile_left">
+        <img src="{{ profile.picture }}" alt="{{ profile.user.username }}" />
+        <h1>{{profile.user.username|title}}</h1>
+        <p>{{ profile.bio }}</p>
+    </div>
+    <div class="profile_right">
+        <div class="profiledonate">
+            <h1>{{profile.user.username|title}} Have Donated</h1>
+            <h3>Amount: ${{donations}}</h3>
+        </div>
+        <div class="bidcreate">
+            <h1>Bid Created</h1>
+            {% for bid in bids %}
+            <a href="{% url 'bid_detail' bid_id=bid.id %}"><img src="{{ bid.picture }}" /> {{bid.name}}</p></a>
 
-    {% if comments %}
-    <h1>Comments</h1>
-    {% for comment in comments %}
-    <p>{{ comment }}</p>
-    {% endfor %}
-    {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
 
 </div>
 

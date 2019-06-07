@@ -7,6 +7,7 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 from accounts.models import Profile
 from decimal import *
+from django.utils import timezone
 
 def landing(request):
 	donations = Donation.objects.all().aggregate(Sum('donation_amount')).get('donation_amount__sum',0.00)
@@ -17,7 +18,7 @@ def landing(request):
 
 @login_required
 def landing2(request):
-	bids = Bid.objects.all()
+	bids = Bid.objects.all().order_by('end_date')
 	return render(request, 'auction/landing2.html', {'bids':bids})
 
 @login_required
@@ -59,9 +60,7 @@ def bid_detail(request, bid_id):
 	user = request.user
 	profile = Profile.objects.get(user=user.pk)
 	bidding = Bidding.objects.filter(bid=bid.id).order_by('-amount').first()
-	
 
-	# highest_bid = Bidding.objects.order_by('-amount')[0]
 	if bidding == None:
 		current_bid = bid.start_amount
 	else:
@@ -81,4 +80,11 @@ def bid_detail(request, bid_id):
 	else:
 		form = BiddingForm()
 		return render(request, 'auction/bid_detail.html', {'bid':bid, 'profile':profile, 'current_bid':current_bid})
-	
+
+@login_required
+def endbid(request):
+	bids = Bid.objects.all().order_by('end_date')
+	return render(request, 'auction/endbid.html', {'bids':bids})
+
+def about(request):
+    return render(request, 'about.html')

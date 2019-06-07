@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block cssLink %}<link rel="stylesheet" href="{% static 'bid.css' %}" /><link rel="stylesheet" href="{% static 'landing2.css' %}" />{% endblock %}
+{% block loggedHome %}
+<div class="landing2">
+        <a class="create_bid" href="{% url 'create_bid' %}"><i class="fas fa-plus"></i> Add an Bid</a>
+        <div class="wrapper2">
+            <ul>
+                {% for bid in bids %}
+                {% if bid.ending == False%}
+            <li>
+                <li class="bidlist">
+                            <a href="{% url 'bid_detail' bid_id=bid.id %}">
+                        <div class="bids">
+                            <div class="bidimage">
+                                <img src="{{ bid.picture }}" />
+                            </div>
+                        </div>
+                        <h4>{{ bid.name }}</h4>
+                        <h4>Ended!! <br/> {{ bid.end_date }}</h4>
+                    </a>
+                </li>
+            </li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

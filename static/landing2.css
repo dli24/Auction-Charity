@@ -1,6 +1,9 @@
 .landing2{
     color:white;
 }
+.landing2 h4{
+    text-align: center;
+}
 .create_bid{
     text-decoration: none;
     color: white;
